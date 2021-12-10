@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="记事本.css"/>
+	</head>
+	<body>
+		<div id="box">
+			<input id="shuru" v-model="inputvalue" @keyup.enter="add" type="text"  placeholder="请输入代办事项" />
+			<ul>
+				<li v-for="(item,index) in list">
+					<div class="item-li">
+						<span>{{index+1}}、{{item}}</span>
+						<input @click="remove(index)" class="X" type="button"  value="×" />
+					</div>
+				</li>
+			</ul>
+			<div v-show="list.length!=0" id="footer">
+<span>剩余代办：<strong>{{list.length}}</strong></span>
+<input @click="clear" type="button" id="clear" value="清除" />
+			</div>
+		</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script type="text/javascript">
+	var box = new Vue({
+		el:"#box",
+		data:{
+			list:["吃饭","睡觉","打游戏","喝可乐"],
+			inputvalue:""
+		},
+		methods:{
+			add:function(){
+				this.list.push(this.inputvalue);
+			},
+			remove:function(index){
+				this.list.splice(index,1)
+			},
+			clear:function(){
+				this.list=[];
+			}
+		}
+	})
+</script>
+	</body>
+</html>
